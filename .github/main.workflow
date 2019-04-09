@@ -1,9 +1,14 @@
-workflow "Check for alex in Pull Requests" {
-  on = "pull_request"
-  resolves = "ALEX"
+workflow "Check for alex in pull request checks" {
+  on = "check_run"
+  resolves = "linter-alex"
 }
 
-action "ALEX" {
+workflow "Check for alex in pull request checks" {
+  on = "check_suite"
+  resolves = "linter-alex"
+}
+
+action "linter-alex" {
   uses = "bdougie/linter-alex@master"
   secrets = ["GITHUB_TOKEN"]
 }
